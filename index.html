@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petualangan Kimia | SMAN 1 Selat</title>
+<style>
+:root{--navy:#102342;--blue:#2563eb;--cyan:#22d3ee;--gold:#fbbf24;--paper:#f8fafc;--ink:#172033;--muted:#64748b;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,#164e63,transparent 35%),linear-gradient(135deg,#0b1530,#172554 55%,#312e81);min-height:100vh}
+header{padding:20px 16px;color:white;text-align:center;border-bottom:1px solid #ffffff30}header .eyebrow{letter-spacing:3px;font-size:.75rem;color:#a5f3fc;font-weight:800}header h1{margin:7px 0;font-size:clamp(1.5rem,4vw,2.5rem)}header p{margin:0;color:#dbeafe}
+.shell{max-width:1050px;margin:20px auto;padding:0 14px 36px;display:grid;grid-template-columns:250px 1fr;gap:16px}
+aside,.panel{background:#ffffffee;border:1px solid #ffffff70;border-radius:20px;box-shadow:0 18px 45px #0003;overflow:hidden}
+aside{padding:16px;height:max-content;position:sticky;top:12px}.progress-label{display:flex;justify-content:space-between;font-size:.85rem;font-weight:700}.progress{height:9px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:9px 0 16px}.bar{height:100%;width:0;background:linear-gradient(90deg,#06b6d4,#2563eb);transition:width .3s}
+.stage-list{display:grid;gap:7px}.stage-btn{border:0;text-align:left;padding:10px 11px;border-radius:12px;background:#f1f5f9;color:#475569;font-weight:700;display:flex;gap:9px;align-items:center;cursor:pointer}.stage-btn .num{width:26px;height:26px;display:grid;place-items:center;border-radius:8px;background:#e2e8f0;font-size:.8rem}.stage-btn.active{background:#dbeafe;color:#1d4ed8;outline:2px solid #93c5fd}.stage-btn.done{background:#dcfce7;color:#166534}.stage-btn:disabled{opacity:.48;cursor:not-allowed}
+.panel{padding:clamp(17px,3vw,30px);min-height:500px}.stage-tag{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:99px;background:#e0f2fe;color:#075985;font-size:.8rem;font-weight:800}.panel h2{font-size:clamp(1.4rem,3vw,2rem);margin:12px 0 7px;color:#102342}.lead{color:#475569;line-height:1.65}.card{border:1px solid #dbeafe;background:#f8fbff;border-radius:15px;padding:15px;margin:14px 0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px;margin:10px 0}.field label{font-size:.9rem;font-weight:750}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:white}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border:0;border-radius:12px;padding:12px 17px;font:inherit;font-weight:800;cursor:pointer}.primary{background:linear-gradient(90deg,#2563eb,#0891b2);color:white}.secondary{background:#e2e8f0;color:#1e293b}.gold{background:#fbbf24;color:#422006}.btn:disabled{opacity:.45;cursor:not-allowed}.callout{border-left:4px solid #06b6d4;padding:12px 14px;background:#ecfeff;border-radius:8px;line-height:1.6}.model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.model{border:1px solid #cbd5e1;border-radius:14px;padding:12px;text-align:center;background:white}.model svg{width:100%;max-width:130px;height:105px}.model h3{margin:6px 0 2px;font-size:1rem}.model p{font-size:.85rem;color:#475569;margin:4px 0}.atom-pic{display:block;margin:auto}.question{padding:15px;border:1px solid #dbeafe;border-radius:14px;margin:14px 0;background:#fff}.question legend,.qtitle{font-weight:800;line-height:1.5}.option{display:flex;gap:9px;padding:9px;margin:5px 0;background:#f8fafc;border-radius:9px;cursor:pointer;line-height:1.4}.option:hover{background:#eff6ff}.feedback{font-weight:750;margin-top:8px}.small{font-size:.86rem;color:#64748b}.order{overflow-wrap:anywhere;background:#0f172a;color:#a5f3fc;padding:13px;border-radius:12px;font-weight:800;line-height:1.8}.score{font-size:1.15rem;font-weight:900;color:#166534}.hidden{display:none!important}.pill{display:inline-block;padding:4px 8px;border-radius:7px;background:#fef3c7;color:#92400e;font-size:.78rem;font-weight:800}
+footer{text-align:center;color:#cbd5e1;padding:0 15px 24px;font-size:.8rem}
+@media(max-width:760px){.shell{grid-template-columns:1fr}aside{position:static}.stage-list{grid-template-columns:repeat(2,minmax(0,1fr))}.stage-btn{font-size:.78rem;padding:8px}.grid2{grid-template-columns:1fr}.panel{min-height:0}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">MISI LABORATORIUM ATOM</div><h1>⚛️ PETUALANGAN KIMIA</h1><p>Kelas X • Struktur Atom dan Konfigurasi Elektron • SMAN 1 Selat</p></header>
+<div class="shell">
+<aside><div class="progress-label"><span>Perjalanan belajar</span><span id="progressText">0/11</span></div><div class="progress"><div class="bar" id="progressBar"></div></div><div class="stage-list" id="stageList"></div><p class="small">Selesaikan misi aktif untuk membuka misi berikutnya. Kemajuan tersimpan pada perangkat yang sama.</p></aside>
+<main class="panel" id="content" aria-live="polite"></main>
+</div>
+<footer>Media pembelajaran Kimia • Disusun oleh I Wayan Suardinata, S.Pd. • SMAN 1 Selat</footer>
+<script>
+/* PENTING: ganti URL di bawah dengan URL Web App Apps Script milik Bapak. */
+// URL Web App Google Apps Script milik guru
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9IdDJA9buFgmiySqB5pufqYZPeVzkyASQEPAwo3ilTWzJqbqwWd8zE-9UJ8YeYVI/exec";
+const STAGES = [
+"Identitas & Misi","Mengapa Atom?","Uji Pemahaman 1","Model Atom & Partikel","Uji Pemahaman 2","Z, A, Isotop","Uji Pemahaman 3","Bohr & Elektron Valensi","Uji Pemahaman 4","Aufbau, Golongan & Periode","Uji Pemahaman 5","Penilaian Formatif"
+];
+const state={current:0,unlocked:0,answers:{},identity:{},scores:{},submitted:false};
+const $=s=>document.querySelector(s);
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderNav(){
+ $("#stageList").innerHTML=STAGES.map((s,i)=>`<button class="stage-btn ${i===state.current?'active':''} ${i<state.unlocked?'done':''}" ${i>state.unlocked?'disabled':''} onclick="goStage(${i})"><span class="num">${i<state.unlocked?'✓':i+1}</span><span>${s}</span></button>`).join("");
+ $("#progressText").textContent=`${state.unlocked}/${STAGES.length}`;$("#progressBar").style.width=`${state.unlocked/STAGES.length*100}%`;
+}
+function goStage(i){if(i>state.unlocked)return;state.current=i;render();}
+function unlockNext(){state.unlocked=Math.max(state.unlocked,Math.min(state.current+1,STAGES.length));if(state.current<STAGES.length-1)state.current++;render();}
+function shell(title,desc,body,button="Tandai selesai & lanjut",extra=""){
+ return `<span class="stage-tag">🧭 MISI ${state.current+1} DARI ${STAGES.length}</span><h2>${title}</h2><p class="lead">${desc}</p>${body}<div class="btnrow">${extra}<button class="btn primary" ${[2,4,6,8,10].includes(state.current)?'id="nextQuizBtn" disabled':""} onclick="unlockNext()">${button} →</button></div>`;
+}
+function render(){
+ renderNav();let c=$("#content");c.innerHTML=stageHTML(state.current);
+}
+function stageHTML(i){
+ if(i===0)return `<span class="stage-tag">🌟 SELAMAT DATANG, PENJELAJAH!</span><h2>Mulai Petualangan Atom</h2><p class="lead">Masuki laboratorium virtual untuk mengungkap rahasia penyusun materi. Isi identitas dengan benar sebelum memulai misi.</p><div class="card"><div style="font-size:3rem;text-align:center">⚛️ 🧪 🚀</div><h3>Aturan perjalanan</h3><ul><li>Baca materi sebelum menjawab tantangan.</li><li>Misi berikutnya terbuka setelah misi aktif diselesaikan.</li><li>Kerjakan secara mandiri dan jujur.</li><li>Setelah menekan <b>Periksa hasil</b> pada penilaian formatif, hasil akan dikirim otomatis ke Google Spreadsheet.</li></ul></div><div class="grid2"><div class="field"><label>Nama lengkap</label><input id="nama" placeholder="Tulis nama lengkap" value="${escapeHTML(state.identity.nama||'')}"></div><div class="field"><label>Kelas</label><select id="kelas"><option value="">Pilih kelas</option>${["X-A","X-B","X-C","X-D","X-E","X-F","X-G","X-H"].map(k=>`<option ${state.identity.kelas===k?'selected':''}>${k}</option>`).join("")}</select></div></div><div class="field"><label>Nomor absen</label><input id="absen" type="number" min="1" placeholder="Nomor absen" value="${escapeHTML(state.identity.absen||'')}"></div><div class="btnrow"><button class="btn primary" onclick="saveIdentity()">Simpan identitas & mulai →</button></div>`;
+ if(i===1)return shell("Mengapa Kita Mempelajari Atom?","Semua benda di sekitar kita tersusun atas partikel. Memahami atom membantu kita menjelaskan sifat bahan dan perubahan yang terjadi.",`
+ <div class="card"><h3>🔎 Mengapa struktur atom penting?</h3><ul><li><b>Memahami sifat unsur:</b> jumlah proton menentukan identitas unsur, sedangkan elektron berperan besar dalam ikatan kimia.</li><li><b>Menjelaskan reaksi:</b> reaksi kimia melibatkan penataan ulang elektron dan atom.</li><li><b>Memilih bahan:</b> sifat logam, semikonduktor, dan bahan baterai berkaitan dengan struktur atom.</li><li><b>Memahami teknologi:</b> lampu neon, layar, sensor, panel surya, dan analisis unsur memanfaatkan perilaku atom/elektron.</li></ul></div>
+ <div class="callout"><b>Contoh sehari-hari:</b> natrium (Na) sangat reaktif, sedangkan klorin (Cl) juga berbahaya dalam bentuk tertentu. Keduanya dapat membentuk natrium klorida (NaCl), garam dapur, dengan sifat yang berbeda dari unsur penyusunnya. Jangan menyamakan sifat senyawa dengan sifat unsur bebasnya.</div>
+ <h3>Jejak perkembangan model atom</h3><div class="model-grid">
+ ${modelCard("Dalton","1803","Atom digambarkan sebagai bola pejal.","dalton")}
+ ${modelCard("Thomson","1904","Muatan positif dengan elektron tersebar di dalamnya.","thomson")}
+ ${modelCard("Rutherford","1911","Atom memiliki inti kecil bermuatan positif; sebagian besar ruang atom kosong.","rutherford")}
+ ${modelCard("Bohr","1913","Elektron berada pada tingkat energi/kulit tertentu.","bohr")}
+ ${modelCard("Model mekanika kuantum","1926","Elektron dijelaskan melalui orbital/daerah kebolehjadian.","quantum")}
+ </div><p class="small">Model atom berkembang berdasarkan bukti eksperimen. Gambar merupakan ilustrasi sederhana, bukan gambaran ukuran sebenarnya.</p>`);
+ if(i===2)return quizStage("Uji Pemahaman 1",[
+ {q:"Mengapa struktur atom perlu dipelajari?",o:["Agar semua unsur memiliki sifat sama","Untuk menjelaskan sifat unsur dan perubahan kimia","Agar atom dapat dilihat langsung dengan mata","Untuk mengubah semua unsur menjadi logam","Karena atom hanya terdapat pada benda hidup"],a:1,e:"Struktur atom membantu menjelaskan sifat unsur, ikatan, dan reaksi kimia."},
+ {q:"Tokoh yang mengemukakan model atom berupa bola pejal adalah ...",o:["J. J. Thomson","Ernest Rutherford","Niels Bohr","John Dalton","James Chadwick"],a:3,e:"Dalton menggambarkan atom sebagai bola pejal."},
+ {q:"Model atom yang mengenalkan tingkat energi/kulit elektron dikembangkan oleh ...",o:["Dalton","Thomson","Bohr","Chadwick","Millikan"],a:2,e:"Bohr menjelaskan elektron berada pada tingkat energi tertentu."}
+ ]);
+ if(i===3)return shell("Model Atom dan Partikel Penyusun","Model atom berubah seiring penemuan baru. Atom tersusun atas inti (proton dan neutron) serta elektron di sekitar inti.",`
+ <div class="model-grid">${modelCard("Dalton","Bola pejal","Belum menggambarkan partikel subatom.","dalton")}${modelCard("Thomson","Roti kismis","Elektron tertanam dalam muatan positif.","thomson")}${modelCard("Rutherford","Inti atom","Inti kecil positif; ruang atom sebagian besar kosong.","rutherford")}${modelCard("Bohr","Kulit elektron","Elektron berada pada tingkat energi tertentu.","bohr")}${modelCard("Mekanika kuantum","Awan elektron","Elektron dijelaskan sebagai kebolehjadian dalam orbital.","quantum")}</div>
+ <h3>Partikel penyusun atom</h3><div class="card"><b>Proton (p⁺)</b> bermuatan +1, berada di inti. Penemuan inti oleh Rutherford dan identifikasi proton berkembang melalui eksperimen berikutnya; istilah proton dipopulerkan Rutherford.</div>
+ <div class="card"><b>Neutron (n⁰)</b> tidak bermuatan, berada di inti. Ditemukan James Chadwick pada 1932.</div>
+ <div class="card"><b>Elektron (e⁻)</b> bermuatan −1, berada di sekitar inti. Ditemukan J. J. Thomson pada 1897 melalui eksperimen sinar katode.</div>
+ <div class="callout">Pada atom netral, jumlah proton = jumlah elektron. Hampir seluruh massa atom terpusat pada inti.</div>`);
+ if(i===4)return quizStage("Uji Pemahaman 2",[
+ {q:"Partikel bermuatan negatif yang ditemukan J. J. Thomson adalah ...",o:["Proton","Neutron","Elektron","Nukleon","Positron"],a:2,e:"Elektron bermuatan negatif dan ditemukan Thomson pada 1897."},
+ {q:"Partikel netral dalam inti atom ditemukan oleh ...",o:["John Dalton","J. J. Thomson","Ernest Rutherford","Niels Bohr","James Chadwick"],a:4,e:"James Chadwick menemukan neutron pada 1932."},
+ {q:"Kesimpulan utama model Rutherford adalah ...",o:["Atom berupa bola pejal tanpa ruang kosong","Elektron tertanam dalam bola positif","Atom memiliki inti kecil dan sebagian besar ruangnya kosong","Elektron tidak memiliki energi","Neutron mengelilingi inti"],a:2,e:"Percobaan hamburan partikel alfa mendukung adanya inti atom."}
+ ]);
+ if(i===5)return shell("Nomor Atom, Nomor Massa, dan Keluarga Nuklida","Gunakan lambang nuklida untuk menentukan jumlah proton, elektron, dan neutron.",`
+ <div class="card"><h3>Rumus inti</h3><p>Notasi: <b>ᴬZX</b> (A = nomor massa, Z = nomor atom).</p><ul><li>Jumlah proton = Z</li><li>Atom netral: jumlah elektron = Z</li><li>Jumlah neutron = A − Z</li><li>Ion positif kehilangan elektron; ion negatif menerima elektron.</li></ul><p>Contoh: ²³₁₁Na memiliki 11 proton, 11 elektron (netral), dan 12 neutron.</p></div>
+ <div class="grid2"><div class="card"><h3>Isotop</h3>Nomor atom sama, nomor massa berbeda. Contoh: ¹²C dan ¹⁴C.</div><div class="card"><h3>Isoton</h3>Jumlah neutron sama, nomor atom berbeda. Contoh: ¹⁴C (8 n) dan ¹⁵N (8 n).</div><div class="card"><h3>Isobar</h3>Nomor massa sama, nomor atom berbeda. Contoh: ⁴⁰Ar dan ⁴⁰Ca.</div><div class="card"><h3>Ingat!</h3>Identitas unsur ditentukan oleh jumlah proton, bukan jumlah neutron atau elektron.</div></div>`);
+ if(i===6)return quizStage("Uji Pemahaman 3",[
+ {q:"Perhatikan pasangan nuklida ¹²₆C dan ¹⁴₆C. Hubungan kedua atom tersebut adalah ...",o:["Isotop","Isoton","Isobar","Ion","Molekul"],a:0,e:"Nomor atom Z sama-sama 6, sedangkan nomor massa A berbeda (12 dan 14), jadi isotop."},
+ {q:"Pasangan ¹⁴₆C dan ¹⁵₇N memiliki jumlah neutron sama. Hubungan keduanya adalah ...",o:["Isotop","Isoton","Isobar","Unsur yang sama","Ion"],a:1,e:"¹⁴₆C memiliki 14−6=8 neutron dan ¹⁵₇N memiliki 15−7=8 neutron, jadi isoton."},
+ {q:"Pasangan ⁴⁰₁₈Ar dan ⁴⁰₂₀Ca memiliki nomor massa sama. Hubungan keduanya adalah ...",o:["Isotop","Isoton","Isobar","Ion","Molekul"],a:2,e:"Nomor massa A sama-sama 40, tetapi nomor atomnya berbeda (18 dan 20), jadi isobar."},
+ {q:"Manakah pasangan isotop yang ditulis dengan lambang atom, nomor massa, dan nomor atom yang benar?",o:["²³₁₁Na dan ²⁴₁₂Mg","³⁵₁₇Cl dan ³⁷₁₇Cl","¹⁴₆C dan ¹⁵₇N","⁴⁰₁₈Ar dan ⁴⁰₂₀Ca","²³₁₁Na dan ²⁴₁₁Mg²⁺"],a:1,e:"Keduanya Cl dengan nomor atom 17 yang sama, tetapi nomor massa 35 dan 37 berbeda."},
+ {q:"Perhatikan ²³₁₁Na dan ²⁴₁₂Mg. Jumlah neutron masing-masing adalah 12 dan 12. Hubungan keduanya adalah ...",o:["Isotop","Isoton","Isobar","Atom yang sama","Ion"],a:1,e:"Na: 23−11=12 neutron; Mg: 24−12=12 neutron. Jadi keduanya isoton."}
+ ]);
+ if(i===7)return shell("Konfigurasi Elektron Bohr dan Elektron Valensi","Pada model Bohr, elektron ditata dalam kulit dengan kapasitas maksimum sederhana 2n². Untuk unsur-unsur awal, kulit terluar membantu mengenali elektron valensi.",`
+ <div class="card"><h3>Susunan kulit</h3><p>K = n 1 (maks. 2); L = n 2 (maks. 8); M = n 3 (maks. 18 secara kapasitas teori, tetapi pada unsur awal pengisian mengikuti urutan energi); N = n 4.</p><p>Untuk latihan unsur sampai Ca, susunan Bohr yang lazim digunakan di tingkat dasar: K, L, M, N dengan pola seperti 2,8,1 untuk Na dan 2,8,8,2 untuk Ca.</p></div>
+ <div class="grid2"><div class="card"><b>Na (Z = 11)</b><p>Konfigurasi kulit: 2, 8, 1</p><p>Elektron valensi = 1</p></div><div class="card"><b>Cl (Z = 17)</b><p>Konfigurasi kulit: 2, 8, 7</p><p>Elektron valensi = 7</p></div><div class="card"><b>Ca (Z = 20)</b><p>Konfigurasi kulit: 2, 8, 8, 2</p><p>Elektron valensi = 2</p></div><div class="card"><b>Ne (Z = 10)</b><p>Konfigurasi kulit: 2, 8</p><p>Elektron valensi = 8</p></div></div>
+ <div class="callout"><b>Strategi:</b> untuk unsur golongan utama, elektron valensi adalah elektron pada kulit terluar. Jangan menyamakan jumlah kulit dengan elektron valensi.</div>`);
+ if(i===8)return quizStage("Uji Pemahaman 4",[
+ {q:"Konfigurasi elektron Bohr atom dengan nomor atom Z = 8 adalah ...",o:["2, 6","2, 8","2, 5","2, 4, 2","8"],a:0,e:"Atom netral Z=8 memiliki 8 elektron: 2 pada kulit K dan 6 pada kulit L."},
+ {q:"Berapa elektron valensi atom dengan konfigurasi Bohr 2, 8, 6?",o:["2","6","8","16","10"],a:1,e:"Elektron pada kulit terluar berjumlah 6, sehingga elektron valensinya 6."},
+ {q:"Konfigurasi elektron Bohr atom dengan Z = 19 adalah ...",o:["2, 8, 9","2, 8, 8, 1","2, 8, 7, 2","2, 8, 1, 8","2, 17"],a:1,e:"Pengisian kulit untuk 19 elektron adalah 2, 8, 8, 1."},
+ {q:"Berapa elektron valensi atom dengan konfigurasi Bohr 2, 8, 2?",o:["1","2","8","10","12"],a:1,e:"Kulit terluarnya berisi 2 elektron."},
+ {q:"Atom netral memiliki nomor atom Z = 17. Konfigurasi Bohr dan elektron valensinya adalah ...",o:["2, 8, 7 dan 7 elektron valensi","2, 8, 8 dan 8 elektron valensi","2, 7, 8 dan 8 elektron valensi","2, 8, 7 dan 8 elektron valensi","2, 8, 6 dan 6 elektron valensi"],a:0,e:"17 elektron tersusun 2, 8, 7; kulit terluar berisi 7 elektron."}
+ ]);
+ if(i===9)return shell("Konfigurasi Aufbau, Golongan, dan Periode","Konfigurasi Aufbau mengisi orbital dari energi lebih rendah ke lebih tinggi. Untuk unsur golongan utama, bilangan kulit/tingkat energi utama tertinggi menunjukkan periode, sedangkan elektron pada kulit terluar membantu menentukan golongan dengan notasi angka Romawi A (misalnya I A, II A, VII A).",`
+ <h3>Urutan pengisian orbital</h3><div class="order">1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → 5s → 4d → 5p → 6s → 4f → 5d → 6p → 7s → 5f → 6d → 7p</div>
+ <div class="card"><h3>Diagram diagonal Aufbau</h3><div class="order" style="background:#eff6ff;color:#1e3a8a">1s<br>2s → 2p<br>3s → 3p → 3d<br>4s → 4p → 4d → 4f<br>5s → 5p → 5d → 5f<br>6s → 6p → 6d<br>7s → 7p</div><p class="small">Ikuti urutan diagonal energi, bukan sekadar urutan baris.</p></div>
+ <div class="grid2"><div class="card"><b>Contoh Na (Z = 11)</b><p>1s² 2s² 2p⁶ 3s¹</p><p>Periode 3; golongan I A.</p></div><div class="card"><b>Contoh Cl (Z = 17)</b><p>1s² 2s² 2p⁶ 3s² 3p⁵</p><p>Periode 3; golongan VII A.</p></div><div class="card"><b>Contoh Ca (Z = 20)</b><p>[Ar] 4s²</p><p>Periode 4; golongan II A.</p></div><div class="card"><b>Aturan cepat</b><p>Periode = bilangan kulit/tingkat energi utama tertinggi yang terisi. Golongan unsur utama ditulis dengan angka Romawi dan A, misalnya I A, II A, atau VII A.</p></div></div>`);
+ if(i===10)return quizStage("Uji Pemahaman 5",[
+ {q:"Konfigurasi elektron Aufbau panjang yang benar untuk Z = 11 adalah ...",o:["1s² 2s² 2p⁶ 3s¹","1s² 2s² 2p⁵ 3s²","1s² 2s² 2p⁶ 3p¹","1s² 2s² 2p⁶ 3s²","1s² 2s² 2p⁷"],a:0,e:"Sebelas elektron mengisi 1s² 2s² 2p⁶ 3s¹. Periode 3 dan golongan I A."},
+ {q:"Konfigurasi elektron Aufbau panjang 1s² 2s² 2p⁶ 3s² 3p⁵ menunjukkan unsur pada periode dan golongan ...",o:["Periode 2, golongan VII A","Periode 3, golongan VII A","Periode 3, golongan V A","Periode 4, golongan II A","Periode 5, golongan I A"],a:1,e:"Bilangan kuantum utama tertinggi n=3, jadi periode 3. Elektron valensi 7, jadi golongan VII A."},
+ {q:"Konfigurasi elektron Aufbau panjang yang benar untuk Z = 12 beserta letaknya adalah ...",o:["1s² 2s² 2p⁶ 3s²; periode 3, golongan II A","1s² 2s² 2p⁶ 3s¹; periode 3, golongan I A","1s² 2s² 2p⁶ 3p²; periode 3, golongan IV A","1s² 2s² 2p⁶ 3s²; periode 2, golongan II A","1s² 2s² 2p⁶ 3s² 3p²; periode 3, golongan IV A"],a:0,e:"Z=12: 1s² 2s² 2p⁶ 3s². Kulit tertinggi n=3 (periode 3), dua elektron valensi (golongan II A)."},
+ {q:"Konfigurasi elektron Aufbau panjang 1s² 2s² 2p⁶ 3s² 3p⁴ berada pada periode dan golongan ...",o:["Periode 2, golongan VI A","Periode 3, golongan VI A","Periode 3, golongan IV A","Periode 4, golongan II A","Periode 3, golongan VIII A"],a:1,e:"Kulit tertinggi n=3, jadi periode 3; elektron valensi 3s²3p⁴ berjumlah 6, jadi golongan VI A."},
+ {q:"Konfigurasi elektron Aufbau panjang yang benar untuk Z = 20 beserta letaknya adalah ...",o:["1s² 2s² 2p⁶ 3s² 3p⁶ 4s²; periode 4, golongan II A","1s² 2s² 2p⁶ 3s² 3p⁶ 3d²; periode 3, golongan II A","1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹; periode 4, golongan I A","1s² 2s² 2p⁶ 3s² 3p⁸; periode 3, golongan II A","1s² 2s² 2p⁶ 3s² 3p⁶ 4p²; periode 4, golongan IV A"],a:0,e:"Z=20: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s². Kulit tertinggi n=4 (periode 4), valensi 2 (golongan II A)."}
+ ]);
+ if(i===11)return formative();
+ return "";
+}
+function modelCard(name,year,desc,type){
+ let drawing="";
+ if(type==="dalton")drawing=`<circle cx="60" cy="50" r="32" fill="#94a3b8" stroke="#475569" stroke-width="2"/>`;
+ if(type==="thomson")drawing=`<circle cx="60" cy="50" r="34" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>${[[45,35],[72,30],[39,61],[68,67],[83,50]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#2563eb"/>`).join("")}`;
+ if(type==="rutherford")drawing=`<ellipse cx="60" cy="50" rx="43" ry="18" fill="none" stroke="#60a5fa" stroke-width="2" transform="rotate(35 60 50)"/><ellipse cx="60" cy="50" rx="43" ry="18" fill="none" stroke="#60a5fa" stroke-width="2" transform="rotate(-35 60 50)"/><circle cx="60" cy="50" r="8" fill="#ef4444"/><circle cx="96" cy="35" r="4" fill="#2563eb"/>`;
+ if(type==="bohr")drawing=`<circle cx="60" cy="50" r="13" fill="none" stroke="#60a5fa" stroke-width="2"/><circle cx="60" cy="50" r="27" fill="none" stroke="#60a5fa" stroke-width="2"/><circle cx="60" cy="50" r="39" fill="none" stroke="#60a5fa" stroke-width="2"/><circle cx="60" cy="50" r="8" fill="#ef4444"/><circle cx="60" cy="23" r="4" fill="#2563eb"/><circle cx="86" cy="50" r="4" fill="#2563eb"/><circle cx="28" cy="65" r="4" fill="#2563eb"/>`;
+ if(type==="quantum")drawing=`<ellipse cx="60" cy="50" rx="39" ry="29" fill="#93c5fd" opacity=".3"/><ellipse cx="60" cy="50" rx="28" ry="38" fill="#60a5fa" opacity=".35" transform="rotate(40 60 50)"/><ellipse cx="60" cy="50" rx="40" ry="14" fill="#2563eb" opacity=".25" transform="rotate(-35 60 50)"/><circle cx="60" cy="50" r="6" fill="#ef4444"/>`;
+ return `<div class="model"><svg viewBox="0 0 120 100" role="img" aria-label="Ilustrasi model atom ${name}"><rect width="120" height="100" rx="12" fill="#eff6ff"/>${drawing}</svg><h3>${name}</h3><p><b>${year}</b></p><p>${desc}</p></div>`;
+}
+function quizStage(title,qs){
+ const id="quiz"+state.current;let old=state.answers[state.current]||{};
+ return shell(title,"Pilih satu jawaban paling tepat pada setiap soal. Setelah semua soal dijawab, periksa hasil untuk membuka misi selanjutnya.",`<form id="${id}">${qs.map((q,qi)=>`<fieldset class="question"><legend>${qi+1}. ${q.q}</legend>${q.o.map((o,oi)=>`<label class="option"><input type="radio" name="q${qi}" value="${oi}" ${old[qi]===oi?'checked':''}> <span>${o}</span></label>`).join("")}<div class="feedback" id="fb${qi}"></div></fieldset>`).join("")}</form><div id="quizResult" class="card hidden"></div>`,`Periksa jawaban & lanjut`, `<button class="btn secondary" onclick="checkQuiz(${JSON.stringify(qs).replace(/"/g,'&quot;')})" type="button">Periksa jawaban</button>`);
+}
+function checkQuiz(qs){
+ let form=document.querySelector("#quiz"+state.current);let vals={};let missing=[];
+ qs.forEach((q,i)=>{let el=form.querySelector(`input[name=q${i}]:checked`);if(el)vals[i]=Number(el.value);else missing.push(i+1)});
+ if(missing.length){alert("Jawab semua soal terlebih dahulu. Belum dijawab: "+missing.join(", "));return}
+ state.answers[state.current]=vals;let score=0;
+ qs.forEach((q,i)=>{let ok=vals[i]===q.a;if(ok)score++;let fb=$("#fb"+i);fb.textContent=(ok?"✅ Benar. ":"❌ Belum tepat. ")+q.e;fb.style.color=ok?"#15803d":"#b91c1c";});
+ let result=$("#quizResult");result.classList.remove("hidden");result.innerHTML=`<div class="score">Skor: ${score}/${qs.length}</div><p>${score===qs.length?"Hebat! Semua jawaban tepat.":"Pelajari umpan balik di atas. Kamu tetap dapat melanjutkan setelah memeriksa pembahasan."}</p>`;
+ state.scores[state.current]=score;let btn=document.querySelector("#content .btn.primary");if(btn)btn.disabled=false;
+}
+function saveIdentity(){
+ let nama=$("#nama").value.trim(),kelas=$("#kelas").value,absen=$("#absen").value.trim();
+ if(!nama||!kelas||!absen){alert("Lengkapi nama, kelas, dan nomor absen.");return}
+ state.identity={nama,kelas,absen};unlockNext();
+}
+function formative(){
+ const qs=[
+ {t:"mc",q:"1. Pasangan ¹²₆C dan ¹⁴₆C termasuk ...",o:["Isotop","Isoton","Isobar","Ion","Molekul"],a:[0]},
+ {t:"mc",q:"2. Pasangan ¹⁴₆C dan ¹⁵₇N termasuk ...",o:["Isotop","Isoton","Isobar","Unsur yang sama","Ion"],a:[1]},
+ {t:"mc",q:"3. Pasangan ⁴⁰₁₈Ar dan ⁴⁰₂₀Ca termasuk ...",o:["Isotop","Isoton","Isobar","Ion","Molekul"],a:[2]},
+ {t:"mc",q:"4. Konfigurasi Bohr atom netral dengan Z = 17 adalah ...",o:["2, 8, 7","2, 8, 8","2, 7, 8","2, 8, 6","2, 8, 5"],a:[0]},
+ {t:"mc",q:"5. Konfigurasi Aufbau panjang atom dengan Z = 12 adalah ...",o:["1s² 2s² 2p⁶ 3s²","1s² 2s² 2p⁶ 3s¹","1s² 2s² 2p⁶ 3p²","1s² 2s² 2p⁶ 3s² 3p²","1s² 2s² 2p⁷ 3s¹"],a:[0]},
+ {t:"complex",q:"6. Pilih semua pasangan yang merupakan isotop.",o:["³⁵₁₇Cl dan ³⁷₁₇Cl","¹⁴₆C dan ¹⁵₇N","²³₁₁Na dan ²⁴₁₂Mg","¹²₆C dan ¹⁴₆C","⁴⁰₁₈Ar dan ⁴⁰₂₀Ca"],a:[0,3]},
+ {t:"complex",q:"7. Pilih semua pasangan yang merupakan isoton (jumlah neutron sama).",o:["¹⁴₆C dan ¹⁵₇N","²³₁₁Na dan ²⁴₁₂Mg","¹²₆C dan ¹⁴₆C","⁴⁰₁₈Ar dan ⁴⁰₂₀Ca","³⁵₁₇Cl dan ³⁷₁₇Cl"],a:[0,1]},
+ {t:"complex",q:"8. Pilih semua pasangan yang merupakan isobar (nomor massa sama, nomor atom berbeda).",o:["⁴⁰₁₈Ar dan ⁴⁰₂₀Ca","¹⁴₆C dan ¹⁵₇N","²³₁₁Na dan ²⁴₁₂Mg","¹²₆C dan ¹⁴₆C","¹⁴₆C dan ¹⁴₇N"],a:[0,4]},
+ {t:"complex",q:"9. Pilih semua konfigurasi Bohr dan elektron valensi yang benar.",o:["Z=8: 2, 6; valensi 6","Z=11: 2, 8, 1; valensi 1","Z=16: 2, 8, 6; valensi 8","Z=17: 2, 8, 7; valensi 7","Z=20: 2, 8, 8, 2; valensi 2"],a:[0,1,3,4]},
+ {t:"complex",q:"10. Pilih semua pernyataan konfigurasi Aufbau panjang dan letak unsur yang benar.",o:["1s² 2s² 2p⁶ 3s¹: periode 3, golongan I A","1s² 2s² 2p⁶ 3s²: periode 3, golongan II A","1s² 2s² 2p⁶ 3s² 3p⁵: periode 3, golongan VII A","1s² 2s² 2p⁶ 3s² 3p⁴: periode 3, golongan IV A","1s² 2s² 2p⁶ 3s² 3p⁶ 4s²: periode 4, golongan II A"],a:[0,1,2,4]},
+ {t:"tf",q:"11. ¹²₆C dan ¹⁴₆C adalah isotop karena nomor atom sama dan nomor massa berbeda.",a:"true"},
+ {t:"tf",q:"12. ¹⁴₆C dan ¹⁵₇N adalah isoton karena keduanya memiliki 8 neutron.",a:"true"},
+ {t:"tf",q:"13. ⁴⁰₁₈Ar dan ⁴⁰₂₀Ca adalah isobar karena nomor massanya sama.",a:"true"},
+ {t:"tf",q:"14. Atom dengan konfigurasi Bohr 2, 8, 7 memiliki 8 elektron valensi.",a:"false"},
+ {t:"tf",q:"15. Konfigurasi Aufbau panjang 1s² 2s² 2p⁶ 3s² 3p⁵ berada pada periode 3 dan golongan VII A.",a:"true"}
+ ];
+ return `<span class="stage-tag">🏆 MISI AKHIR</span><h2>Penilaian Formatif: Ujian Penjelajah Atom</h2><p class="lead">Kerjakan 15 soal berikut. Soal 1–5 pilihan ganda, 6–10 pilihan ganda kompleks (pilih semua jawaban benar), dan 11–15 benar/salah. Materi difokuskan pada isotop, isoton, isobar; konfigurasi Bohr dan elektron valensi; serta konfigurasi Aufbau panjang, periode, dan golongan dengan angka Romawi. Setelah semua soal dijawab dan Bapak/Ibu menekan <b>Periksa hasil</b>, hasil akan dikirim otomatis ke Google Spreadsheet.</p>
+ <form id="finalForm">${qs.map((q,i)=>`<div class="question"><div class="qtitle">${q.q}</div>${q.t==="mc"||q.t==="complex"?q.o.map((o,j)=>`<label class="option"><input type="${q.t==="mc"?"radio":"checkbox"}" name="f${i}" value="${j}"> <span>${o}</span></label>`).join(""):`<label class="option"><input type="radio" name="f${i}" value="true"> Benar</label><label class="option"><input type="radio" name="f${i}" value="false"> Salah</label>`}<div class="feedback" id="ff${i}"></div></div>`).join("")}</form>
+ <div id="finalResult" class="card hidden"></div><div class="btnrow"><button class="btn secondary" onclick="gradeFinal()" type="button" id="gradeBtn">Periksa hasil & simpan otomatis</button></div><p class="small" id="sendStatus">Hasil akan dikirim otomatis ke Google Spreadsheet setelah jawaban berhasil diperiksa.</p>`;
+}
+function gradeFinal(){
+ const qs=[
+ {t:"mc",a:[0],e:"Isotop memiliki nomor atom sama dan nomor massa berbeda."},{t:"mc",a:[1],e:"Keduanya memiliki 8 neutron, sehingga isoton."},{t:"mc",a:[2],e:"Nomor massa sama-sama 40 dan nomor atom berbeda, sehingga isobar."},{t:"mc",a:[0],e:"Z=17 memiliki konfigurasi Bohr 2, 8, 7."},{t:"mc",a:[0],e:"Z=12: 1s² 2s² 2p⁶ 3s²."},
+ {t:"complex",a:[0,3],e:"Isotop memiliki nomor atom sama dan nomor massa berbeda."},{t:"complex",a:[0,1],e:"Kedua pasangan memiliki jumlah neutron sama."},{t:"complex",a:[0,4],e:"Kedua pasangan memiliki nomor massa sama dan nomor atom berbeda."},{t:"complex",a:[0,1,3,4],e:"Cocokkan jumlah elektron pada kulit terluar dengan elektron valensi."},{t:"complex",a:[0,1,2,4],e:"Periode ditentukan dari n tertinggi; golongan utama ditulis dengan angka Romawi A."},
+ {t:"tf",a:"true",e:"Z sama (6), A berbeda (12 dan 14)."},{t:"tf",a:"true",e:"14−6=8 dan 15−7=8 neutron."},{t:"tf",a:"true",e:"Nomor massa keduanya 40, nomor atomnya berbeda."},{t:"tf",a:"false",e:"Konfigurasi 2,8,7 memiliki 7 elektron valensi."},{t:"tf",a:"true",e:"n tertinggi 3 dan elektron valensi 7, sehingga periode 3, golongan VII A."}
+ ];
+ let total=0,possible=0,answers=[];
+ for(let i=0;i<qs.length;i++){
+  const q=qs[i];let selected=[...document.querySelectorAll(`#finalForm [name="f${i}"]:checked`)].map(x=>x.value);
+  if(!selected.length){alert(`Soal nomor ${i+1} belum dijawab.`);return}
+  let correct=false;
+  if(q.t==="tf"){correct=selected[0]===q.a;answers.push(selected[0]);possible++;}
+  else{let nums=selected.map(Number).sort((a,b)=>a-b),want=q.a.slice().sort((a,b)=>a-b);correct=nums.length===want.length&&nums.every((v,j)=>v===want[j]);answers.push(nums);possible+=1;}
+  if(correct)total++;
+  let fb=$("#ff"+i);fb.textContent=(correct?"✅ Benar. ":"❌ Belum tepat. ")+q.e;fb.style.color=correct?"#15803d":"#b91c1c";
+ }
+ state.final={score:total,max:possible,answers};$("#finalResult").classList.remove("hidden");$("#finalResult").innerHTML=`<div class="score">Nilai formatif: ${Math.round(total/possible*100)} (${total}/${possible})</div><p>Periksa umpan balik tiap soal. Nilai ini merupakan latihan formatif; guru dapat meninjau jawaban di Spreadsheet.</p>`;
+ $("#gradeBtn").disabled=true;$("#sendStatus").textContent="Jawaban sudah diperiksa. Mengirim hasil secara otomatis ke Google Spreadsheet…";
+ sendFinal();
+}
+async function sendFinal(){
+ if(!state.final){alert("Periksa jawaban terlebih dahulu.");return}
+ if(state.submitted){$("#sendStatus").textContent="Hasil sudah pernah dikirim dari sesi ini. Periksa Google Spreadsheet.";return}
+ if(!SCRIPT_URL.endsWith("/exec")){alert("URL Web App Apps Script belum benar. Pastikan URL berakhiran /exec.");return}
+ $("#gradeBtn").disabled=true;$("#sendStatus").textContent="Mengirim jawaban…";
+ const payload={nama:state.identity.nama,kelas:state.identity.kelas,absen:state.identity.absen,skor:state.final.score,nilai:Math.round(state.final.score/state.final.max*100),jawaban:JSON.stringify(state.final.answers),detailSkor:JSON.stringify(state.scores),waktu:new Date().toISOString(),media:"Petualangan Kimia Kelas X"};
+ try{
+  await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:new URLSearchParams({payload:JSON.stringify(payload)})});
+  state.submitted=true;
+  $("#sendStatus").textContent="✅ Permintaan hasil sudah dikirim otomatis. Karena browser tidak dapat membaca balasan Apps Script dalam mode no-cors, periksa Google Spreadsheet untuk memastikan data masuk.";
+ }catch(e){$("#sendStatus").textContent="Pengiriman gagal: "+e.message+". Periksa URL Web App dan izin akses.";btn.disabled=false;}
+}
+render();
+</script>
+</body></html>
